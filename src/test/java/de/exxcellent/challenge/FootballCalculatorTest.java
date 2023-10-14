@@ -36,4 +36,12 @@ public class FootballCalculatorTest {
 
         assertEquals("Liverpool", testTeam);
     }
+
+    @Test
+    public void testGetTeamWithBestGoalDifferencePositiveGoalDifference() {
+        FootballCalculator calculator = new FootballCalculator(VALID_FOOTBALL_POSITIVE_GOALS_FILE_PATH);
+        String testTeam = calculator.getTeamWithBestGoalDifference();
+
+        assertEquals("Arsenal", testTeam);
+    }
 }

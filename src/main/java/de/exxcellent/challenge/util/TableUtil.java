@@ -38,6 +38,8 @@ public class TableUtil {
             // calculate the difference between column1 and column2
             currentDifference = differenceFunction.apply(Integer.parseInt(row[indexColumn1]), Integer.parseInt(row[indexColumn2]));
 
+            System.out.println(row[0] + ": " + currentDifference);
+
             // save current row label if the difference is smaller as current minimum
             if (currentDifference < minDifference) {
                 minDifference = currentDifference;

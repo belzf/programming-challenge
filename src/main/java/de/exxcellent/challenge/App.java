@@ -47,6 +47,9 @@ public final class App {
             String teamWithSmallestGoalSpread = footballCalculator.getTeamWithSmallestGoalSpread();
             System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
 
+            String teamWithBestGoalDifference = footballCalculator.getTeamWithBestGoalDifference();
+            System.out.printf("Team with best goal difference       : %s%n", teamWithBestGoalDifference);
+
         } catch (IllegalArgumentException illegalArgumentException) {
             System.out.println("The football data could not be imported. Are you sure '" + footballDataPath + "' points " +
                     "to a valid football data CSV file?");

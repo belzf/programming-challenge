@@ -45,4 +45,21 @@ public class FootballCalculator extends TableCalculator{
                 2,
                 (column1, column2) -> Math.abs(column1 - column2));
     }
+
+    /**
+     * Calculates and returns the name of the football team of the currently imported football data with the best goal
+     * difference.
+     *
+     * @return The respective team name as a String.
+     */
+    public String getTeamWithBestGoalDifference() {
+
+        return TableUtil.getRowWithMinimalDifference(
+                this.data,
+                0,
+                1,
+                2,
+                // invert result to get the team with the highest goal difference as "minimum"
+                (column1, column2) -> -1*(column1 - column2));
+    }
 }
