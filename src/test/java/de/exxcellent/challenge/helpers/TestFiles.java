@@ -13,4 +13,5 @@ public class TestFiles {
     public static final Path INVALID_FILE_PATH = baseDir.resolve(Path.of("src/test/java/de/exxcellent/challenge/resources/invalid-row-length.csv"));
     public static final Path SEMICOLON_FILE_PATH = baseDir.resolve(Path.of("src/test/java/de/exxcellent/challenge/resources/semicolon.csv"));
     public static final Path EMPTY_FILE_PATH = baseDir.resolve(Path.of("src/test/java/de/exxcellent/challenge/resources/empty-file.csv"));
+    public static final Path VALID_WEATHER_FILE_PATH = baseDir.resolve(Path.of("src/test/java/de/exxcellent/challenge/resources/weather-test1.csv"));
 }
