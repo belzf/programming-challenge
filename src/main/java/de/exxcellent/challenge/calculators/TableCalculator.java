@@ -16,7 +16,10 @@ import java.util.Arrays;
 public abstract class TableCalculator {
 
     // the table data
-    final String[][] data;
+    String[][] data;
+    final Path dataSourcePath;
+    final String[] validHeader;
+    final int[] columnIndices;
 
     /**
      * Constructor which automatically imports the table data used by this object. Valid table data is a table
@@ -30,35 +33,62 @@ public abstract class TableCalculator {
      */
     public TableCalculator(Path dataFilePath, String[] validHeader, int[] columnIndices) throws IllegalArgumentException {
 
-        Readable reader = new CSVReader();
-        String[][] csvData;
+        dataSourcePath = dataFilePath;
+        this.validHeader = validHeader;
+        this.columnIndices = columnIndices;
 
         try {
             // import the table data
-            csvData = reader.readTableData(dataFilePath);
+            String[][] tableData = loadData();
 
-            // check if the import was successfully
-            if (csvData == null || csvData.length == 0) {
-                throw new IllegalArgumentException("No data could be loaded for data file under " + dataFilePath);
+            // verify that the loaded data is correctly formatted
+            validateDataFormat(tableData);
 
-            } else {
-                String[] dataHeader = csvData[0];
-
-                if (!Arrays.equals(dataHeader, validHeader)) {
-                    throw new IllegalArgumentException("The imported table data does not have a valid header.");
-                }
-
-                // save the table data without header and only with the specified columns
-                this.data = Arrays.stream(csvData)
-                        .skip(1)
-                        .map(row -> Arrays.stream(columnIndices)
-                                .mapToObj(index -> row[index])
-                                .toArray(String[]::new))
-                        .toArray(String[][]::new);
-            }
+            // save the table data without header and only with the specified columns
+            this.data = Arrays.stream(tableData)
+                    .skip(1)
+                    .map(row -> Arrays.stream(columnIndices)
+                            .mapToObj(index -> row[index])
+                            .toArray(String[]::new))
+                    .toArray(String[][]::new);
 
         } catch (IOException e) {
             throw new IllegalArgumentException("Data file path is invalid: \n " + e);
+        }
+    }
+
+    /**
+     * Load the table data of this object from the source specified by {@link #dataSourcePath}.
+     * Subclasses can override this method to use a different Reader for loading their data.
+     *
+     * @return The loaded table data as String[][]
+     * @throws IOException if some error with the source file occurs
+     */
+    protected String[][] loadData() throws IOException {
+        Readable reader = new CSVReader();
+        return reader.readTableData(dataSourcePath);
+    }
+
+    /**
+     * Validate the given table data by checking the following properties:
+     *  * data exists and is not empty
+     *  * the header matches {@link #validHeader}
+     *
+     * @param tableData The data to validate.
+     * @throws IllegalArgumentException if the data does not have a valid format.
+     */
+    protected void validateDataFormat(String[][] tableData) throws IllegalArgumentException {
+
+        // check if the import was successfully
+        if (tableData == null || tableData.length == 0) {
+            throw new IllegalArgumentException("No data could be loaded for data file under " + dataSourcePath);
+
+        } else {
+            String[] dataHeader = tableData[0];
+
+            if (!Arrays.equals(dataHeader, validHeader)) {
+                throw new IllegalArgumentException("The imported table data does not have a valid header.");
+            }
         }
     }
 }
