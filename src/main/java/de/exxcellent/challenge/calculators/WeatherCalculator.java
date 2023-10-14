@@ -12,21 +12,20 @@ import java.nio.file.Path;
  */
 public class WeatherCalculator extends TableCalculator {
 
-    private static final String CSV_DELIMITER = ",";
     private static final String[] WEATHER_DATA_HEADER = {"Day","MxT","MnT","AvT","AvDP","1HrP TPcpn","PDir","AvSp","Dir","MxS","SkyC","MxR","Mn","R AvSLP"};
     private static final int[] WEATHER_COLUMN_INDICES = {0, 1, 2};
 
     /**
      * Constructor which automatically imports the weather data used by this object. Valid weather data is a table
      * of data with a header like {@link #WEATHER_DATA_HEADER}. The weather data will be imported
-     * from the CSV file saved under the given path. The day, the maximum and minimum temperature data will be saved
+     * from the file saved under the given path. The day, the maximum and minimum temperature data will be saved
      * in {@link #data}.
      * @param dataFilePath The path to the csv file with the weather data.
      * @throws IllegalArgumentException if weather data could not be imported or is not valid.
      */
     public WeatherCalculator(Path dataFilePath) throws IllegalArgumentException {
 
-        super(dataFilePath, CSV_DELIMITER, WEATHER_DATA_HEADER, WEATHER_COLUMN_INDICES);
+        super(dataFilePath, WEATHER_DATA_HEADER, WEATHER_COLUMN_INDICES);
     }
 
     /**

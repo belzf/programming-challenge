@@ -10,7 +10,14 @@ import java.util.List;
 /**
  * Contains a method to import a CSV file as an array of arrays
  */
-public class CSVReader {
+public class CSVReader implements Readable{
+
+    private static final String CSV_DELIMITER = ",";
+
+    @Override
+    public String[][] readTableData(Path pathToFile) throws IllegalArgumentException, IOException {
+        return importCSVFile(pathToFile, CSV_DELIMITER);
+    }
 
     /**
      * Import a given CSV file as an array of arrays of Strings.

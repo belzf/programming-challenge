@@ -13,13 +13,12 @@ import java.nio.file.Path;
  */
 public class FootballCalculator extends TableCalculator{
 
-    private static final String CSV_DELIMITER = ",";
     private static final String[] FOOTBALL_DATA_HEADER = {"Team","Games","Wins","Losses","Draws","Goals","Goals Allowed","Points"};
     private static final int[] FOOTBALL_COLUMN_INDICES = {0, 5, 6};
 
     /**
      * Constructor which automatically imports the football data used by this object. Valid football data is a table
-     * of data with a header like {@link #FOOTBALL_DATA_HEADER}. The football data will be imported from the CSV file
+     * of data with a header like {@link #FOOTBALL_DATA_HEADER}. The football data will be imported from the file
      * saved under the given path. The team, the goals and goals allowed columns will be saved in {@link #data}.
      *
      * @param dataFilePath The path to the csv file with the football data.
@@ -27,7 +26,7 @@ public class FootballCalculator extends TableCalculator{
      */
     public FootballCalculator(Path dataFilePath) throws IllegalArgumentException {
 
-        super(dataFilePath, CSV_DELIMITER, FOOTBALL_DATA_HEADER, FOOTBALL_COLUMN_INDICES);
+        super(dataFilePath, FOOTBALL_DATA_HEADER, FOOTBALL_COLUMN_INDICES);
     }
 
     /**
