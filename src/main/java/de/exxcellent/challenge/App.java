@@ -1,6 +1,6 @@
 package de.exxcellent.challenge;
 
-import de.exxcellent.challenge.weather.WeatherCalculator;
+import de.exxcellent.challenge.calculators.WeatherCalculator;
 
 import java.nio.file.Path;
 
