@@ -1,8 +1,7 @@
 /**
- * The root package for the data challenge containing the entry point
- * {@link de.exxcellent.challenge.App} and containing the resource files.
- * Please create and document your own package structure appropriate to your design.
+ * The root package for the App containing the entry point
+ * {@link de.exxcellent.challenge.App}.
  *
- * @author Benjamin Schmid <benjamin.schmid@exxcellent.de>
+ * @author Felix Belz
  */
 package de.exxcellent.challenge;
