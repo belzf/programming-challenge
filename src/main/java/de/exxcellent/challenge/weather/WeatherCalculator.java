@@ -1,6 +1,7 @@
 package de.exxcellent.challenge.weather;
 
 import de.exxcellent.challenge.io.CSVReader;
+import de.exxcellent.challenge.util.TableUtil;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -66,23 +67,11 @@ public class WeatherCalculator {
      */
     public String getDayWithSmallestSpread() {
 
-        int minSpread = Integer.MAX_VALUE;
-        String minSpreadDay = "-1";
-        int currentSpread;
-
-        // calculate the spread for each day
-        for (String[] row : this.data) {
-
-            // calculate the difference between maximum and minimum temperature
-            currentSpread = Integer.parseInt(row[1]) - Integer.parseInt(row[2]);
-
-            // save current day if spread is smaller as current minimum
-            if (currentSpread < minSpread) {
-                minSpread = currentSpread;
-                minSpreadDay = row[0];
-            }
-        }
-
-        return minSpreadDay;
+        return TableUtil.getRowWithMinimalDifference(
+                this.data,
+                0,
+                1,
+                2,
+                (column1, column2) -> column1 - column2);
     }
 }
